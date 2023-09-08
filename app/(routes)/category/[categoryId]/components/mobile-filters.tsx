@@ -28,7 +28,7 @@ const MobileFilters = ({ sizes, colors }: MobileFiltersProps) => {
       <Dialog
         open={open}
         as="div"
-        className="fixed z-40 lg:hidden w-screen h-screen top-0"
+        className="fixed inset z-40 lg:hidden w-screen h-screen top-0"
         onClose={onClose}
       >
         {/* Background */}
