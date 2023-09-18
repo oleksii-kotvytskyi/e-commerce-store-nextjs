@@ -5,6 +5,8 @@ import Footer from "@/components/footer";
 import NavBar from "@/components/nav-bar";
 import ModalProvider from "@/providers/modal-provider";
 import ToastProvider from "@/providers/toast-provider";
+import { cn } from "@/lib/utils";
+import ViewPortProvider from "@/providers/breakpoints";
 
 const font = Urbanist({ subsets: ["latin"] });
 
@@ -20,12 +22,14 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={font.className}>
-        <ModalProvider />
-        <ToastProvider />
-        <NavBar />
-        {children}
-        <Footer />
+      <body className={cn(font.className, "flex flex-col")}>
+        <ViewPortProvider>
+          <ModalProvider />
+          <ToastProvider />
+          <NavBar />
+          {children}
+          <Footer />
+        </ViewPortProvider>
       </body>
     </html>
   );

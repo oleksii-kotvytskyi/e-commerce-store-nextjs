@@ -1,10 +1,12 @@
 "use client";
 
 import Button from "@/components/ui/button";
+
 import { cn } from "@/lib/utils";
 import { Color, Size } from "@/types";
 import { useRouter, useSearchParams } from "next/navigation";
 import qs from "query-string";
+import { useState } from "react";
 
 interface FilterProps {
   data: (Size | Color)[];
@@ -14,12 +16,15 @@ interface FilterProps {
 
 const Filter = ({ data, name, valueKey }: FilterProps) => {
   const searchParams = useSearchParams();
+  const [activeFilter, setActive] = useState<string | null>(
+    searchParams.get(valueKey)
+  );
   const router = useRouter();
 
-  const selectedValue = searchParams.get(valueKey);
   const onClick = (id: string) => {
     const current = qs.parse(searchParams.toString());
 
+    console.log(searchParams.get(valueKey));
     const query = {
       ...current,
       [valueKey]: id,
@@ -27,7 +32,11 @@ const Filter = ({ data, name, valueKey }: FilterProps) => {
 
     if (current[valueKey] === id) {
       query[valueKey] = null;
+      setActive(null);
+    } else {
+      setActive(id);
     }
+
     const url = qs.stringifyUrl(
       {
         url: window.location.href,
@@ -36,7 +45,7 @@ const Filter = ({ data, name, valueKey }: FilterProps) => {
       { skipNull: true }
     );
 
-    router.push(url);
+    router.push(url, { scroll: false });
   };
 
   return (
@@ -49,7 +58,7 @@ const Filter = ({ data, name, valueKey }: FilterProps) => {
             <Button
               className={cn(
                 "rounded-md text-sm text-gray-800 bg-white border border-gray-300",
-                selectedValue === filter.id && "bg-black text-white"
+                filter.id === activeFilter && "bg-black text-white"
               )}
               onClick={() => onClick(filter.id)}
             >
