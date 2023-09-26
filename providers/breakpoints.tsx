@@ -9,7 +9,7 @@ type Props = {
 };
 
 const ViewPortProvider = ({ children }: Props): ReactElement | null => {
-  const isMounted = useMounted();
+  const { isMounted } = useMounted();
 
   const sm = useMediaQuery("(min-width: 640px)");
   const md = useMediaQuery("(min-width: 768px)");

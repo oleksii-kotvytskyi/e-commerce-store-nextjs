@@ -6,6 +6,8 @@ import useMounted from "@/hooks/use-mounted";
 import CartItem from "./components/cart-item";
 import Summary from "./components/summary";
 
+export const revalidate = 0;
+
 const CartPage = () => {
   const { isMounted } = useMounted();
   const { items } = useCart();

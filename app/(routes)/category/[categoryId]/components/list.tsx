@@ -16,7 +16,7 @@ export const ProductsPage = ({
   colorId?: string;
   sizeId?: string;
 }) => {
-  const isMounted = useMounted();
+  const { isMounted } = useMounted();
 
   const [data, setData] = useState<Product[] | undefined>(undefined);
   const [isLoading, setIsLoading] = useState(true);
@@ -38,9 +38,7 @@ export const ProductsPage = ({
 
   if (!isMounted) return null;
 
-  if (isLoading) {
-    return <ProductListLoading />;
-  }
+  if (isLoading) return <ProductListLoading />;
 
   return (
     <div className="mt-6 lg:col-span-4 lg:mt-0">

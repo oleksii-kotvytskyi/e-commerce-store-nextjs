@@ -4,7 +4,7 @@ import ProductListSkeleton from "@/components/skeletons/product-list";
 import useMounted from "@/hooks/use-mounted";
 
 const ProductListLoading = () => {
-  const isMounted = useMounted();
+  const { isMounted } = useMounted();
 
   if (!isMounted) return null;
 
