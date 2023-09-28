@@ -9,6 +9,8 @@ interface MainNavProps {
   data: Category[];
 }
 
+export const revalidate = 0;
+
 const MainNav = ({ data }: MainNavProps) => {
   const pathName = usePathname();
 
